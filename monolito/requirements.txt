@@ -1,0 +1,18 @@
+#FastAPI y servidor
+fastapi==0.104.1
+uvicorn==0.24.0
+
+#base de datos
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+#validación
+pydantic==2.5.0
+email-validator==2.1.0
+
+#SOAP
+spyne==2.14.0
+lxml==4.9.3
+
+#utilidades
+python-multipart==0.0.6

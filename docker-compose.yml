@@ -1,116 +1,45 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  db:
+  # ========== MONOLITO==========
+  monolith-api:
+    build: ./monolith
+    container_name: monolith-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/monolith_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - monolith-network
+    restart: unless-stopped
+
+  # ========== BD ==========
+  postgres:
     image: postgres:16-alpine
+    container_name: monolith-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: appdb
+      POSTGRES_DB: monolith_db
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d appdb"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
-      retries: 20
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
       retries: 5
+    networks:
+      - monolith-network
+    restart: unless-stopped
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  auth-api:
-    build: ./services/auth-api
-    environment:
-      JWT_SECRET_KEY: mi-clave-secreta-super-segura-cambiar-en-produccion
-    ports:
-      - "8004:8000"
-
-  users-api:
-    build: ./services/users-api
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/appdb
-      REDIS_URL: redis://redis:6379
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    ports:
-      - "8001:8000"
-
-  projects-api:
-    build: ./services/projects-api
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/appdb
-      REDIS_URL: redis://redis:6379
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
-      USERS_API_URL: http://users-api:8000
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    ports:
-      - "8002:8000"
-
-  tasks-api:
-    build: ./services/tasks-api
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/appdb
-      REDIS_URL: redis://redis:6379
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
-      USERS_API_URL: http://users-api:8000
-      PROJECTS_API_URL: http://projects-api:8000
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    ports:
-      - "8003:8000"
-
-  api-gateway:
-    image: nginx:alpine
-    ports:
-      - "8080:80"
-    volumes:
-      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./gateway/rate-limit-zones:/etc/nginx/rate-limit-zones
-    depends_on:
-      - auth-api
-      - users-api
-      - projects-api
-      - tasks-api
+networks:
+  monolith-network:
+    driver: bridge
 
 volumes:
-  dbdata:
+  postgres_data:
