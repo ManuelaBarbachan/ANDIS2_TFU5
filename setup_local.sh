@@ -16,7 +16,7 @@ echo ""
 
 #instalar dependencias
 echo "Instalando dependencias..."
-cd monolith
+cd monolito
 pip install -r requirements.txt
 
 if [ $? -eq 0 ]; then

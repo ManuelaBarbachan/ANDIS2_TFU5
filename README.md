@@ -143,6 +143,29 @@ El monolito mejora la latencia eliminando:
 - Coordinación de transacciones distribuidas
 - Overhead de múltiples contenedores
 
+## Otras mejoras
+
+
+- Consistencia: 
+    - Transacciones ACID nativas (sin sagas ni compensaciones)
+    - Sin problemas de consistencia eventual
+    - Una sola fuente de verdad
+
+- Menor uso de recursos:
+    - Menos memoria (1 proceso vs 4+)
+    - Menos CPU (sin overhead de red)
+    - Menos almacenamiento (sin Redis, RabbitMQ)
+
+- Facilidad para testear:
+    - Tests de integración más simples
+    - No necesitamos mockear servicios externos
+    - El setup es mas rápido
+
+- Menor costo operacional:
+    - Menos contenedores que monitorear
+    - Logs centralizados en un solo lugar
+    - Menos puntos de falla
+
 > **Scripting de demostración:** ver comandos curl arriba y scripts en `validation-scripts/`
 > 
 

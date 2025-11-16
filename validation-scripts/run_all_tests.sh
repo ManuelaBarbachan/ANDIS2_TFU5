@@ -10,7 +10,7 @@ echo ""
 #verificar servidor
 if ! curl -s "http://localhost:$PORT/health" > /dev/null 2>&1; then
     echo "Servidor no está corriendo en puerto $PORT"
-    echo "Iniciá con: cd monolith && uvicorn app.main:app --port $PORT"
+    echo "Iniciá con: cd monolito && uvicorn app.main:app --port $PORT"
     exit 1
 fi
 echo "Servidor activo"

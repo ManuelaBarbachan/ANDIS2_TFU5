@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # ========== MONOLITO==========
   monolith-api:
-    build: ./monolith
+    build: ./monolito
     container_name: monolith-api
     ports:
       - "8000:8000"
