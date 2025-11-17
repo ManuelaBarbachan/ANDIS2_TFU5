@@ -13,7 +13,7 @@ curl -s -X POST "$BASE_URL/soap" \
   -H "Content-Type: text/xml" \
   -d '<?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xmlns:tns="http://monolith.projectmanager.soap">
+               xmlns:tns="http://monolito.projectmanager.soap">
   <soap:Body>
     <tns:GetServiceInfo/>
   </soap:Body>
@@ -26,7 +26,7 @@ curl -s -X POST "$BASE_URL/soap" \
   -H "Content-Type: text/xml" \
   -d '<?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xmlns:tns="http://monolith.projectmanager.soap">
+               xmlns:tns="http://monolito.projectmanager.soap">
   <soap:Body>
     <tns:CreateUser>
       <tns:name>Usuario SOAP</tns:name>
@@ -42,7 +42,7 @@ curl -s -X POST "$BASE_URL/soap" \
   -H "Content-Type: text/xml" \
   -d '<?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xmlns:tns="http://monolith.projectmanager.soap">
+               xmlns:tns="http://monolito.projectmanager.soap">
   <soap:Body>
     <tns:ListAllUsers/>
   </soap:Body>
@@ -55,7 +55,7 @@ curl -s -X POST "$BASE_URL/soap" \
   -H "Content-Type: text/xml" \
   -d '<?xml version="1.0" encoding="UTF-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-               xmlns:tns="http://monolith.projectmanager.soap">
+               xmlns:tns="http://monolito.projectmanager.soap">
   <soap:Body>
     <tns:GetUserById>
       <tns:user_id>1</tns:user_id>

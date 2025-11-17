@@ -15,7 +15,7 @@ Conversión de arquitectura de **microservicios** a **monolito**. Una sola API (
 
 ### Local (sin Docker)
 ```bash
-cd monolith
+cd monolito
 pip3 install -r requirements.txt
 python3 -m uvicorn app.main:app --reload --port 8000
 ```
@@ -54,7 +54,7 @@ curl http://localhost:8000/tasks/1/activities
 
 ```bash
 curl -X POST http://localhost:8000/soap -H "Content-Type: text/xml" -d '<?xml version="1.0"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://monolith.projectmanager.soap">
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://monolito.projectmanager.soap">
   <soap:Body><tns:ListAllUsers/></soap:Body>
 </soap:Envelope>'
 ```
@@ -72,7 +72,7 @@ Todo en una sola base de datos, sin schemas separados.
 ## UML (Mermaid)
 ```mermaid
 flowchart LR
-    subgraph Monolith API
+    subgraph Monolito API
         Main[FastAPI App] --> Users[Users Router]
         Main --> Projects[Projects Router]
         Main --> Tasks[Tasks Router]

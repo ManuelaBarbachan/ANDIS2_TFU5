@@ -2,28 +2,28 @@ version: '3.8'
 
 services:
   # ========== MONOLITO==========
-  monolith-api:
+  monolito-api:
     build: ./monolito
-    container_name: monolith-api
+    container_name: monolito-api
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/monolith_db
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/monolito_db
     depends_on:
       postgres:
         condition: service_healthy
     networks:
-      - monolith-network
+      - monolito-network
     restart: unless-stopped
 
   # ========== BD ==========
   postgres:
     image: postgres:16-alpine
-    container_name: monolith-postgres
+    container_name: monolito-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: monolith_db
+      POSTGRES_DB: monolito_db
     ports:
       - "5432:5432"
     volumes:
@@ -34,11 +34,11 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - monolith-network
+      - monolito-network
     restart: unless-stopped
 
 networks:
-  monolith-network:
+  monolito-network:
     driver: bridge
 
 volumes:

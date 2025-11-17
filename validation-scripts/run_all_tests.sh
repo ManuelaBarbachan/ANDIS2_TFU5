@@ -10,7 +10,7 @@ echo ""
 #verificar servidor
 if ! curl -s "http://localhost:$PORT/health" > /dev/null 2>&1; then
     echo "Servidor no está corriendo en puerto $PORT"
-    echo "Iniciá con: cd monolito && uvicorn app.main:app --port $PORT"
+    echo "Iniciá con: cd monolito && python3 -m uvicorn app.main:app --port $PORT"
     exit 1
 fi
 echo "Servidor activo"
@@ -26,8 +26,22 @@ echo "=== PARTE 2: SOAP ==="
 ./test_soap.sh $PORT
 echo ""
 
-echo "=== PARTE 3: RENDIMIENTO ==="
+echo "=== PARTE 3: ACID ==="
+./test_acid.sh $PORT
+echo ""
+
+echo "=== PARTE 4: VALIDACIONES ==="
+./test_validations.sh $PORT
+echo ""
+
+echo "=== PARTE 5: CRUD ==="
+./test_crud.sh $PORT
+echo ""
+
+echo "=== PARTE 6: RENDIMIENTO ==="
 ./test_performance.sh $PORT
 echo ""
 
-echo "TODAS LAS PRUEBAS PUDIERON SER COMPLETADAS"
+echo "╔════════════════════════════════════════╗"
+echo "║  TODAS LAS PRUEBAS COMPLETADAS         ║"
+echo "╚════════════════════════════════════════╝"

@@ -54,7 +54,7 @@ def root():
 def health_check():
     return {
         "status": "healthy",
-        "architecture": "monolithic",
+        "architecture": "monolitica",
         "services": {
             "users": "integrated",
             "projects": "integrated", 

@@ -33,7 +33,7 @@ echo "╚═══════════════════════�
 echo ""
 echo "para ejecutar la aplicación:"
 echo ""
-echo "  cd monolith"
+echo "  cd monolito"
 echo "  uvicorn app.main:app --reload --port 8000"
 echo ""
 echo "luego abrí en el navegador:"

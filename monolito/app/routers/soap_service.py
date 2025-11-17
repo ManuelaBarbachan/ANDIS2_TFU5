@@ -102,12 +102,12 @@ class ProjectManagerService(ServiceBase):
     @rpc(_returns=Unicode)
     def GetServiceInfo(ctx):
         """Información del servicio SOAP"""
-        return "ProjectManager SOAP Service v1.0 - Monolithic Architecture"
+        return "ProjectManager SOAP Service v1.0 - Arquitectura monolitica"
 
 # Crear aplicación Spyne SOAP
 soap_app = Application(
     [ProjectManagerService],
-    tns='http://monolith.projectmanager.soap',
+    tns='http://monolito.projectmanager.soap',
     in_protocol=Soap11(validator='lxml'),
     out_protocol=Soap11()
 )
