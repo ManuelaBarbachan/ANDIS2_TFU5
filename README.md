@@ -1,4 +1,4 @@
-# Mini Gestor de Proyectos — TFU5 UT5 (monolito +SOAP)
+# Mini Gestor de Proyectos — UT5 TFU (monolito +SOAP)
 Anteriormente: TFU (FastAPI + Docker + ACID + UT4 Architectural Patterns)
 
 Conversión de arquitectura de **microservicios** a **monolito**. Una sola API (FastAPI) desplegada con **Docker Compose**, utilizando **PostgreSQL** y transacciones **ACID**.
